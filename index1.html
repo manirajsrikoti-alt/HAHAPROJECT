@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Nova Pro — a scroll-driven product film rendered on HTML Canvas from 300 sequential frames.">
+    <meta name="theme-color" content="#000000">
+    <title>Nova Pro — Scroll Experience</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!--
+      Preload the first frame so the very first canvas paint is instant.
+      fetchpriority="high" tells the browser to prioritize this request.
+      The remaining 299 frames are preloaded by FramePreloader in script.js.
+    -->
+    <link rel="preload" as="image" href="frames/ezgif-frame-001.jpg" fetchpriority="high">
+</head>
+<body>
+
+    <!-- ============================================================
+         Loading overlay
+         Covers the page while all 300 frames are being preloaded.
+         Fades out with an Apple-style ease once the sequence is ready.
+         role="status" + aria-live so screen readers announce progress.
+         ============================================================ -->
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite" aria-label="Loading experience">
+        <div class="loading-content">
+            <div class="loading-logo" aria-hidden="true">
+                <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="28" cy="28" r="24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" class="ring" />
+                </svg>
+            </div>
+            <div class="loading-bar" aria-hidden="true">
+                <div class="loading-bar-fill" id="loadingBar"></div>
+            </div>
+            <p class="loading-text">Loading experience
+                <span class="loading-percent" id="loadingPercent">0%</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         Main content
+         ============================================================ -->
+    <main id="main">
+
+        <!-- ========================================================
+             Scroll stage
+             JS sizes this element (viewport-height x multiplier) so
+             the sticky hero stays pinned while you scrub the film.
+             ======================================================== -->
+        <div class="scroll-stage" id="scrollStage">
+
+            <!-- Sticky hero: canvas film plays as you scroll -->
+            <section class="hero" id="hero" aria-label="Animated product film — scroll to play">
+                <canvas id="animationCanvas" aria-hidden="true"></canvas>
+
+                <!-- Caption revealed mid-sequence by scroll progress -->
+                <div class="hero-caption" id="heroCaption">
+                    <p class="caption-kicker">Nova Pro</p>
+                    <h2 class="caption-title">Immersive sound.<br>In motion.</h2>
+                </div>
+
+                <!-- Scroll hint fades out as soon as the user scrolls -->
+                <p class="scroll-hint" id="scrollHint" aria-hidden="true">Scroll to explore</p>
+            </section>
+        </div>
+
+        <!-- ========================================================
+             Content sections — normal document flow after the film
+             ======================================================== -->
+        <section class="section section-intro" aria-labelledby="introTitle">
+            <h1 class="display" id="introTitle" data-reveal>Meet Nova Pro.</h1>
+            <p class="lead" data-reveal>
+                Adaptive audio that surrounds you. Crafted from aerospace-grade
+                aluminum and intuition — then set in motion, frame by frame.
+            </p>
+        </section>
+
+        <section class="section section-specs" aria-labelledby="specsTitle">
+            <h2 class="section-title" id="specsTitle" data-reveal>Engineered to disappear.</h2>
+            <div class="spec-grid">
+                <article class="spec-card" data-reveal>
+                    <h3 class="spec-name">Adaptive ANC</h3>
+                    <p class="spec-desc">Up to 4x more noise cancelled in real time, tuned 200 times per second.</p>
+                </article>
+                <article class="spec-card" data-reveal>
+                    <h3 class="spec-name">40-hour battery</h3>
+                    <p class="spec-desc">All-day listening. A 5-minute charge buys 4 more hours.</p>
+                </article>
+                <article class="spec-card" data-reveal>
+                    <h3 class="spec-name">Spatial Audio</h3>
+                    <p class="spec-desc">Head-tracked 360-degree sound with dynamic EQ and room-sensing.</p>
+                </article>
+                <article class="spec-card" data-reveal>
+                    <h3 class="spec-name">Ultra-low latency</h3>
+                    <p class="spec-desc">Under 40 milliseconds — imperceptible for gaming and live monitoring.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section-cta" aria-labelledby="ctaTitle">
+            <h2 class="display" id="ctaTitle" data-reveal>Sound, finally<br>in motion.</h2>
+            <p class="cta-sub" data-reveal>Available in Midnight, Starlight and Space Grey.</p>
+            <div class="cta-row" data-reveal>
+                <a class="btn btn-primary" href="#main">Pre-order now</a>
+                <a class="btn btn-link" href="#hero" id="replayLink">Watch the film again</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" aria-label="Footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 Nova Audio. Designed in Cupertino.</p>
+            <nav aria-label="Legal">
+                <a href="#main">Privacy</a>
+                <a href="#main">Terms</a>
+                <a href="#main">Legal</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Debug frame counter. Visible on hover over the film, or
+         permanently with the URL fragment #debug. -->
+    <div class="frame-debug" id="frameDebug" hidden>Frame: 0 / 299</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
