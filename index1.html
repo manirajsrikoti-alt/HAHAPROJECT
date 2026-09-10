@@ -1,1032 +1,1712 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SR University</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #222;
-      background: #fff;
-      line-height: 1.6;
-    }
-
-    /* ================= HEADER ================= */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: white;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    }
-
-    .top-bar {
-      background: #071b45;
-      color: white;
-      padding: 8px 6%;
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
-
-    .navbar {
-      height: 78px;
-      padding: 0 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-box {
-      width: 52px;
-      height: 52px;
-      background: #f5b400;
-      color: #071b45;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 22px;
-      border-radius: 8px;
-    }
-
-    .logo-text h2 {
-      color: #071b45;
-      font-size: 23px;
-    }
-
-    .logo-text span {
-      font-size: 11px;
-      color: #666;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 28px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #222;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    nav a:hover {
-      color: #e6a900;
-    }
-
-    .apply-btn {
-      background: #f5b400;
-      color: #071b45 !important;
-      padding: 11px 20px;
-      border-radius: 5px;
-    }
-
-    /* ================= HERO ================= */
-
-    .hero {
-      min-height: 600px;
-      background:
-        linear-gradient(
-          rgba(4, 20, 55, 0.78),
-          rgba(4, 20, 55, 0.78)
-        ),
-        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=80");
-
-      background-size: cover;
-      background-position: center;
-
-      display: flex;
-      align-items: center;
-      padding: 80px 8%;
-      color: white;
-    }
-
-    .hero-content {
-      max-width: 750px;
-    }
-
-    .hero-content span {
-      color: #f5b400;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 1.1;
-      margin: 15px 0;
-    }
-
-    .hero p {
-      font-size: 19px;
-      max-width: 650px;
-      color: #eee;
-    }
-
-    .hero-buttons {
-      margin-top: 30px;
-      display: flex;
-      gap: 15px;
-    }
-
-    .btn {
-      padding: 14px 27px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: #f5b400;
-      color: #071b45;
-    }
-
-    .btn-outline {
-      border: 2px solid white;
-      color: white;
-    }
-
-    /* ================= STATS ================= */
-
-    .stats {
-      background: #071b45;
-      color: white;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      padding: 35px 8%;
-      text-align: center;
-    }
-
-    .stat h2 {
-      color: #f5b400;
-      font-size: 35px;
-    }
-
-    .stat p {
-      font-size: 14px;
-    }
-
-    /* ================= GENERAL ================= */
-
-    section {
-      padding: 80px 8%;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-title span {
-      color: #d99f00;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .section-title h2 {
-      font-size: 40px;
-      color: #071b45;
-      margin-top: 8px;
-    }
-
-    /* ================= ABOUT ================= */
-
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-image img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 15px 15px 0 #f5b400;
-    }
-
-    .about-content h2 {
-      color: #071b45;
-      font-size: 38px;
-      margin-bottom: 20px;
-    }
-
-    .about-content p {
-      color: #555;
-      margin-bottom: 15px;
-    }
-
-    /* ================= PROGRAMS ================= */
-
-    .programs {
-      background: #f6f8fc;
-    }
-
-    .program-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .program-card {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      border-top: 5px solid #f5b400;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .program-card:hover {
-      transform: translateY(-8px);
-    }
-
-    .program-icon {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
-
-    .program-card h3 {
-      color: #071b45;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-
-    .program-card p {
-      color: #666;
-    }
-
-    .program-card a {
-      display: inline-block;
-      margin-top: 18px;
-      color: #c38b00;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* ================= WHY US ================= */
-
-    .why-us {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .feature {
-      padding: 25px;
-      background: #f7f8fa;
-      border-radius: 8px;
-    }
-
-    .feature h3 {
-      color: #071b45;
-      margin-bottom: 8px;
-    }
-
-    /* ================= RESEARCH ================= */
-
-    .research {
-      background: #071b45;
-      color: white;
-      text-align: center;
-    }
-
-    .research .section-title h2 {
-      color: white;
-    }
-
-    .research .section-title span {
-      color: #f5b400;
-    }
-
-    .research-content {
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .research-content p {
-      color: #ddd;
-      font-size: 18px;
-    }
-
-    /* ================= NEWS ================= */
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .news-card {
-      border-radius: 10px;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
-
-    .news-card img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-    }
-
-    .news-content {
-      padding: 22px;
-    }
-
-    .news-content small {
-      color: #c38b00;
-      font-weight: bold;
-    }
-
-    .news-content h3 {
-      color: #071b45;
-      margin: 8px 0;
-    }
-
-    /* ================= CTA ================= */
-
-    .cta {
-      background: #f5b400;
-      text-align: center;
-      padding: 70px 8%;
-    }
-
-    .cta h2 {
-      color: #071b45;
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
-
-    .cta p {
-      margin-bottom: 25px;
-    }
-
-    .cta .btn {
-      background: #071b45;
-      color: white;
-    }
-
-    /* ================= FOOTER ================= */
-
-    footer {
-      background: #061735;
-      color: white;
-      padding: 60px 8% 20px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1.5fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    footer h3 {
-      color: #f5b400;
-      margin-bottom: 18px;
-    }
-
-    footer p,
-    footer a {
-      color: #ccc;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    footer a:hover {
-      color: #f5b400;
-    }
-
-    .copyright {
-      border-top: 1px solid #31405d;
-      padding-top: 20px;
-      text-align: center;
-      color: #aaa;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 900px) {
-
-      nav ul {
-        gap: 12px;
-      }
-
-      .program-grid,
-      .news-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .about,
-      .why-us {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-
-      .top-bar {
-        display: none;
-      }
-
-      .navbar {
-        height: auto;
-        padding: 15px 5%;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .hero {
-        min-height: 520px;
-        padding: 60px 6%;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-      }
-
-      .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-      }
-
-      section {
-        padding: 60px 6%;
-      }
-
-      .section-title h2 {
-        font-size: 32px;
-      }
-
-      .program-grid,
-      .news-grid,
-      .features,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maniraj Srikoti | AI Engineer & Builder</title>
+
+    <meta
+        name="description"
+        content="Maniraj Srikoti — AI-focused developer, builder and student entrepreneur."
+    >
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(99, 102, 241, 0.16),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 70%,
+                    rgba(168, 85, 247, 0.13),
+                    transparent 30%
+                );
+
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 22px 7%;
+
+            backdrop-filter: blur(20px);
+            background: rgba(5,5,5,0.55);
+
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            padding: 10px 18px;
+            border-radius: 100px;
+
+            background: white;
+            color: black !important;
+
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 150px 8% 100px;
+
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1250px;
+            width: 100%;
+
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 8px 14px;
+
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+
+            color: #aaa;
+            font-size: 13px;
+
+            margin-bottom: 25px;
+
+            background: rgba(255,255,255,0.03);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            box-shadow:
+                0 0 15px #22c55e;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 7vw, 100px);
+
+            line-height: 0.95;
+
+            letter-spacing: -6px;
+
+            font-weight: 900;
+
+            margin-bottom: 30px;
+        }
+
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #8b5cf6,
+                    #c084fc
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+
+            color: #999;
+
+            font-size: 19px;
+
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-button {
+            padding: 15px 25px;
+
+            border-radius: 10px;
+
+            background: white;
+            color: black;
+
+            font-weight: 800;
+
+            transition: 0.3s;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.12);
+        }
+
+        .secondary-button {
+            padding: 15px 25px;
+
+            border-radius: 10px;
+
+            border: 1px solid #333;
+
+            color: white;
+
+            transition: 0.3s;
+        }
+
+        .secondary-button:hover {
+            border-color: #8b5cf6;
+            background: rgba(139,92,246,0.08);
+        }
+
+        /* =========================================================
+           HERO VISUAL
+        ========================================================= */
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .orb {
+            width: 360px;
+            height: 360px;
+
+            border-radius: 50%;
+
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #c084fc,
+                    #7c3aed 30%,
+                    #111 65%
+                );
+
+            box-shadow:
+                0 0 80px rgba(139,92,246,0.25),
+                inset -30px -30px 80px rgba(0,0,0,0.5);
+
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .orb::before {
+            content: "AI";
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 90px;
+            font-weight: 900;
+
+            color: rgba(255,255,255,0.85);
+
+            letter-spacing: -8px;
+        }
+
+        .orb::after {
+            content: "";
+
+            position: absolute;
+
+            inset: -25px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(168,85,247,0.3);
+
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes float {
+
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes rotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================================================
+           SECTIONS
+        ========================================================= */
+
+        section {
+            padding: 120px 8%;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-label {
+            color: #8b5cf6;
+
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            font-weight: 800;
+
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: clamp(38px,5vw,65px);
+
+            letter-spacing: -3px;
+
+            margin-bottom: 25px;
+        }
+
+        .section-description {
+            max-width: 700px;
+
+            color: #888;
+
+            line-height: 1.8;
+
+            font-size: 17px;
+        }
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .about-card {
+            padding: 35px;
+
+            border-radius: 20px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.015)
+                );
+        }
+
+        .about-card h3 {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .about-card p {
+            color: #999;
+            line-height: 1.9;
+        }
+
+        .highlight {
+            color: #c084fc;
+        }
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
+
+        .skills-grid {
+            margin-top: 60px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .skill {
+            padding: 25px;
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.025);
+
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(139,92,246,0.5);
+
+            background: rgba(139,92,246,0.06);
+        }
+
+        .skill-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .skill h3 {
+            margin-bottom: 7px;
+        }
+
+        .skill p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           PROJECTS
+        ========================================================= */
+
+        .projects {
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent,
+                    rgba(139,92,246,0.03),
+                    transparent
+                );
+        }
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+
+            margin-top: 60px;
+        }
+
+        .project {
+            position: relative;
+
+            padding: 35px;
+
+            min-height: 330px;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #101010,
+                    #080808
+                );
+
+            transition: 0.4s;
+        }
+
+        .project:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(139,92,246,0.4);
+        }
+
+        .project-number {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .project h3 {
+            font-size: 32px;
+            margin: 25px 0 15px;
+
+            letter-spacing: -1px;
+        }
+
+        .project p {
+            color: #888;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 25px;
+        }
+
+        .tag {
+            padding: 7px 11px;
+
+            border-radius: 100px;
+
+            font-size: 12px;
+
+            color: #bbb;
+
+            background: rgba(255,255,255,0.06);
+        }
+
+        .project-arrow {
+            position: absolute;
+
+            right: 30px;
+            top: 30px;
+
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: white;
+            color: black;
+
+            font-size: 20px;
+        }
+
+        /* =========================================================
+           JOURNEY
+        ========================================================= */
+
+        .timeline {
+            margin-top: 60px;
+
+            border-left:
+                1px solid #333;
+
+            padding-left: 35px;
+        }
+
+        .timeline-item {
+            position: relative;
+
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: "";
+
+            position: absolute;
+
+            left: -41px;
+            top: 7px;
+
+            width: 11px;
+            height: 11px;
+
+            border-radius: 50%;
+
+            background: #8b5cf6;
+
+            box-shadow:
+                0 0 20px rgba(139,92,246,0.8);
+        }
+
+        .timeline-date {
+            color: #8b5cf6;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .timeline-item h3 {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .timeline-item p {
+            color: #888;
+            max-width: 650px;
+        }
+
+        /* =========================================================
+           LEADERSHIP
+        ========================================================= */
+
+        .leadership-card {
+            margin-top: 50px;
+
+            padding: 50px;
+
+            border-radius: 25px;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(139,92,246,0.15),
+                    transparent 35%
+                ),
+                #0c0c0c;
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .leadership-card h3 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .leadership-card p {
+            color: #999;
+            max-width: 800px;
+            line-height: 1.9;
+        }
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta {
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 950px;
+
+            margin: auto;
+
+            padding: 90px 40px;
+
+            border-radius: 30px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(139,92,246,0.14),
+                    transparent 60%
+                );
+        }
+
+        .cta h2 {
+            font-size: clamp(45px,6vw,75px);
+
+            letter-spacing: -4px;
+
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 40px 8%;
+
+            border-top: 1px solid rgba(255,255,255,0.07);
+
+            color: #666;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a {
+            color: #888;
+            transition: 0.3s;
+        }
+
+        .socials a:hover {
+            color: white;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                letter-spacing: -4px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 80px 6%;
+            }
+
+            nav {
+                padding: 18px 6%;
+            }
+
+            .hero {
+                padding: 130px 6% 70px;
+            }
+
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership-card {
+                padding: 30px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-  <!-- ================= HEADER ================= -->
+<div class="grid"></div>
 
-  <header>
 
-    <div class="top-bar">
-      <span>📞 +91 87000 00000</span>
-      <span>✉ admissions@sruniversity.edu.in</span>
-    </div>
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
-    <div class="navbar">
+<nav>
 
-      <div class="logo">
-        <div class="logo-box">SR</div>
+    <a href="#home" class="logo">
+        MANIRAJ<span>.</span>
+    </a>
 
-        <div class="logo-text">
-          <h2>SR University</h2>
-          <span>Learn • Innovate • Transform</span>
+    <ul class="nav-links">
+
+        <li>
+            <a href="#about">About</a>
+        </li>
+
+        <li>
+            <a href="#skills">Skills</a>
+        </li>
+
+        <li>
+            <a href="#projects">Projects</a>
+        </li>
+
+        <li>
+            <a href="#journey">Journey</a>
+        </li>
+
+        <li>
+            <a href="#contact" class="nav-button">
+                Let's Talk
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-container">
+
+        <div>
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                Building with AI
+
+            </div>
+
+
+            <h1>
+
+                I build
+                <span class="gradient-text">
+                    intelligent
+                </span>
+                things.
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                I'm <strong>Maniraj Srikoti</strong> —
+                a B.Tech student, AI-focused developer
+                and builder passionate about turning
+                ambitious ideas into real products.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#projects"
+                    class="primary-button"
+                >
+                    Explore My Work →
+                </a>
+
+                <a
+                    href="#about"
+                    class="secondary-button"
+                >
+                    About Me
+                </a>
+
+            </div>
+
         </div>
-      </div>
 
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#programs">Programs</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li>
-            <a href="#apply" class="apply-btn">Apply Now</a>
-          </li>
-        </ul>
-      </nav>
+
+        <div class="hero-visual">
+
+            <div class="orb"></div>
+
+        </div>
 
     </div>
 
-  </header>
+</section>
 
 
-  <!-- ================= HERO ================= -->
+<!-- =========================================================
+     ABOUT
+========================================================= -->
 
-  <section class="hero" id="home">
+<section id="about">
 
-    <div class="hero-content">
+    <div class="section-container">
 
-      <span>WELCOME TO SR UNIVERSITY</span>
+        <div class="section-label">
+            01 — About
+        </div>
 
-      <h1>
-        Shape Your Future
-        With Innovation
-      </h1>
+        <div class="about-grid">
 
-      <p>
-        Discover a future-focused education where technology,
-        research, entrepreneurship and innovation come together.
-      </p>
+            <div>
 
-      <div class="hero-buttons">
-        <a href="#programs" class="btn btn-primary">
-          Explore Programs
-        </a>
+                <h2 class="section-title">
+                    Curious mind.
+                    <br>
+                    Relentless builder.
+                </h2>
 
-        <a href="#about" class="btn btn-outline">
-          Discover SR University
-        </a>
-      </div>
+                <p class="section-description">
+
+                    I enjoy going beyond tutorials and
+                    actually building systems that solve
+                    meaningful problems.
+
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <h3>
+                    A little about me
+                </h3>
+
+                <p>
+
+                    I'm currently pursuing my
+                    <span class="highlight">
+                        B.Tech
+                    </span>
+
+                    and exploring the intersection of
+                    artificial intelligence, software
+                    engineering and entrepreneurship.
+
+                    <br><br>
+
+                    I like experimenting with AI agents,
+                    automation, developer tools and
+                    real-world products.
+
+                    <br><br>
+
+                    My goal isn't just to use AI.
+
+                    <strong>
+                        I want to build with it.
+                    </strong>
+
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- ================= STATS ================= -->
+<!-- =========================================================
+     SKILLS
+========================================================= -->
 
-  <div class="stats">
+<section id="skills">
 
-    <div class="stat">
-      <h2>50+</h2>
-      <p>Academic Programs</p>
-    </div>
+    <div class="section-container">
 
-    <div class="stat">
-      <h2>5000+</h2>
-      <p>Students</p>
-    </div>
+        <div class="section-label">
+            02 — Skills
+        </div>
 
-    <div class="stat">
-      <h2>100+</h2>
-      <p>Faculty Members</p>
-    </div>
+        <h2 class="section-title">
+            Things I love building with.
+        </h2>
 
-    <div class="stat">
-      <h2>25+</h2>
-      <p>Research Labs</p>
-    </div>
+        <p class="section-description">
 
-  </div>
+            A constantly evolving toolkit focused on
+            AI, software development and automation.
 
-
-  <!-- ================= ABOUT ================= -->
-
-  <section id="about">
-
-    <div class="about">
-
-      <div class="about-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=1000&q=80"
-          alt="University Campus"
-        >
-
-      </div>
-
-      <div class="about-content">
-
-        <span>ABOUT US</span>
-
-        <h2>Building Tomorrow's Leaders</h2>
-
-        <p>
-          SR University is committed to creating an environment
-          where students can learn, experiment and transform
-          ideas into real-world solutions.
         </p>
 
-        <p>
-          Our education model combines strong academic foundations
-          with innovation, research, entrepreneurship and industry
-          collaboration.
-        </p>
 
-        <a href="#" class="btn btn-primary">
-          Learn More
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
+        <div class="skills-grid">
 
 
-  <!-- ================= PROGRAMS ================= -->
+            <div class="skill">
 
-  <section class="programs" id="programs">
+                <div class="skill-icon">
+                    🤖
+                </div>
 
-    <div class="section-title">
+                <h3>
+                    Artificial Intelligence
+                </h3>
 
-      <span>ACADEMICS</span>
+                <p>
+                    AI agents, LLMs, automation and
+                    intelligent workflows.
+                </p>
 
-      <h2>Explore Our Programs</h2>
-
-    </div>
-
-
-    <div class="program-grid">
-
-      <div class="program-card">
-
-        <div class="program-icon">💻</div>
-
-        <h3>Computer Science</h3>
-
-        <p>
-          Learn artificial intelligence, data science,
-          software engineering and modern computing.
-        </p>
-
-        <a href="#">Explore →</a>
-
-      </div>
+            </div>
 
 
-      <div class="program-card">
+            <div class="skill">
 
-        <div class="program-icon">🤖</div>
+                <div class="skill-icon">
+                    🧠
+                </div>
 
-        <h3>Artificial Intelligence</h3>
+                <h3>
+                    Machine Learning
+                </h3>
 
-        <p>
-          Build intelligent systems using machine learning,
-          deep learning and generative AI.
-        </p>
+                <p>
+                    Data-driven systems and
+                    intelligent applications.
+                </p>
 
-        <a href="#">Explore →</a>
-
-      </div>
-
-
-      <div class="program-card">
-
-        <div class="program-icon">⚙️</div>
-
-        <h3>Engineering</h3>
-
-        <p>
-          Develop engineering skills through practical
-          projects, laboratories and industry exposure.
-        </p>
-
-        <a href="#">Explore →</a>
-
-      </div>
+            </div>
 
 
-      <div class="program-card">
+            <div class="skill">
 
-        <div class="program-icon">📊</div>
+                <div class="skill-icon">
+                    💻
+                </div>
 
-        <h3>Management</h3>
+                <h3>
+                    Development
+                </h3>
 
-        <p>
-          Develop leadership, business strategy and
-          entrepreneurship skills.
-        </p>
+                <p>
+                    Python, JavaScript, HTML, CSS
+                    and modern developer tools.
+                </p>
 
-        <a href="#">Explore →</a>
-
-      </div>
-
-
-      <div class="program-card">
-
-        <div class="program-icon">🔬</div>
-
-        <h3>Research</h3>
-
-        <p>
-          Work with faculty and research teams to solve
-          challenging real-world problems.
-        </p>
-
-        <a href="#">Explore →</a>
-
-      </div>
+            </div>
 
 
-      <div class="program-card">
+            <div class="skill">
 
-        <div class="program-icon">🚀</div>
+                <div class="skill-icon">
+                    ⚡
+                </div>
 
-        <h3>Entrepreneurship</h3>
+                <h3>
+                    Automation
+                </h3>
 
-        <p>
-          Turn innovative ideas into startups through
-          mentoring and incubation.
-        </p>
+                <p>
+                    Connecting tools and creating
+                    autonomous workflows.
+                </p>
 
-        <a href="#">Explore →</a>
+            </div>
 
-      </div>
+
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- ================= WHY SR ================= -->
+<!-- =========================================================
+     PROJECTS
+========================================================= -->
 
-  <section>
+<section class="projects" id="projects">
 
-    <div class="section-title">
+    <div class="section-container">
 
-      <span>WHY SR UNIVERSITY</span>
+        <div class="section-label">
+            03 — Selected Work
+        </div>
 
-      <h2>Education Beyond Classrooms</h2>
+        <h2 class="section-title">
+            Ideas turned into systems.
+        </h2>
+
+        <p class="section-description">
+
+            I learn fastest when I'm building something
+            that actually has a purpose.
+
+        </p>
+
+
+        <div class="projects-grid">
+
+
+            <!-- AMAI -->
+
+            <div class="project">
+
+                <span class="project-number">
+                    01 / AI Startup
+                </span>
+
+                <div class="project-arrow">
+                    ↗
+                </div>
+
+                <h3>
+                    AMAI
+                </h3>
+
+                <p>
+
+                    An autonomous AI marketing team designed
+                    to help small businesses automate marketing,
+                    generate strategies and operate AI-powered
+                    workflows.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span class="tag">
+                        AI Agents
+                    </span>
+
+                    <span class="tag">
+                        Automation
+                    </span>
+
+                    <span class="tag">
+                        Marketing
+                    </span>
+
+                    <span class="tag">
+                        Python
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI SYSTEMS -->
+
+            <div class="project">
+
+                <span class="project-number">
+                    02 / AI Engineering
+                </span>
+
+                <div class="project-arrow">
+                    ↗
+                </div>
+
+                <h3>
+                    AI Agent Systems
+                </h3>
+
+                <p>
+
+                    Experiments with autonomous coding agents,
+                    LLM workflows, voice agents and automation
+                    systems.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span class="tag">
+                        LLMs
+                    </span>
+
+                    <span class="tag">
+                        Agents
+                    </span>
+
+                    <span class="tag">
+                        APIs
+                    </span>
+
+                    <span class="tag">
+                        Automation
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CAMPUS -->
+
+            <div class="project">
+
+                <span class="project-number">
+                    03 / Campus
+                </span>
+
+                <div class="project-arrow">
+                    ↗
+                </div>
+
+                <h3>
+                    Student Projects
+                </h3>
+
+                <p>
+
+                    Building practical technology projects
+                    through hackathons, university activities
+                    and experimentation.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span class="tag">
+                        Hackathons
+                    </span>
+
+                    <span class="tag">
+                        Prototyping
+                    </span>
+
+                    <span class="tag">
+                        Engineering
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- FUTURE -->
+
+            <div class="project">
+
+                <span class="project-number">
+                    04 / What's Next
+                </span>
+
+                <div class="project-arrow">
+                    ✦
+                </div>
+
+                <h3>
+                    Something Bigger
+                </h3>
+
+                <p>
+
+                    Exploring new ideas around autonomous
+                    AI, developer tools and products that
+                    can create real-world impact.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span class="tag">
+                        Research
+                    </span>
+
+                    <span class="tag">
+                        Innovation
+                    </span>
+
+                    <span class="tag">
+                        Startups
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
 
+</section>
 
-    <div class="why-us">
 
-      <div>
+<!-- =========================================================
+     JOURNEY
+========================================================= -->
 
-        <h2 style="color:#071b45; margin-bottom:20px;">
-          Learn. Build. Innovate.
+<section id="journey">
+
+    <div class="section-container">
+
+        <div class="section-label">
+            04 — Journey
+        </div>
+
+        <h2 class="section-title">
+            Still early.
+            <br>
+            Already building.
+        </h2>
+
+
+        <div class="timeline">
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    NOW
+                </div>
+
+                <h3>
+                    B.Tech Student
+                </h3>
+
+                <p>
+
+                    Exploring AI engineering, software
+                    development and entrepreneurship while
+                    building real projects.
+
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    BUILDING
+                </div>
+
+                <h3>
+                    AMAI — Autonomous AI Marketing
+                </h3>
+
+                <p>
+
+                    Working on an AI agent ecosystem that
+                    can help businesses automate marketing
+                    operations.
+
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    LEADERSHIP
+                </div>
+
+                <h3>
+                    Campus Leadership
+                </h3>
+
+                <p>
+
+                    Taking part in student communities,
+                    organizing events and collaborating
+                    with students and faculty.
+
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    NEXT
+                </div>
+
+                <h3>
+                    AI Engineer / Founder
+                </h3>
+
+                <p>
+
+                    The long-term goal is to build impactful
+                    AI systems and eventually turn ambitious
+                    ideas into companies.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LEADERSHIP
+========================================================= -->
+
+<section>
+
+    <div class="section-container">
+
+        <div class="section-label">
+            Beyond Code
+        </div>
+
+
+        <div class="leadership-card">
+
+            <h3>
+                Leadership matters too.
+            </h3>
+
+            <p>
+
+                Technology is ultimately about people.
+
+                <br><br>
+
+                Alongside building technology, I've been
+                involved in student leadership and campus
+                activities — working with students,
+                coordinating events and learning how to
+                turn ideas into something a team can
+                actually execute.
+
+                <br><br>
+
+                Because building a great product isn't only
+                about writing great code.
+
+                <strong>
+                    It's about understanding people,
+                    communicating clearly and taking ownership.
+                </strong>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta" id="contact">
+
+    <div class="cta-box">
+
+        <div class="section-label">
+            05 — Let's Connect
+        </div>
+
+        <h2>
+            Have an idea?
+            <br>
+            Let's build it.
         </h2>
 
         <p>
-          Students are encouraged to solve real-world problems
-          through hands-on projects, research and collaboration.
+            I'm always interested in interesting
+            problems, ambitious ideas and people
+            who want to build something meaningful.
         </p>
 
-      </div>
 
-
-      <div class="features">
-
-        <div class="feature">
-          <h3>🎯 Industry Focus</h3>
-          <p>Connect classroom learning with industry needs.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🔬 Research</h3>
-          <p>Explore emerging technologies through research.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🚀 Innovation</h3>
-          <p>Build projects and transform ideas into products.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🌎 Global Exposure</h3>
-          <p>Develop skills for opportunities around the world.</p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= RESEARCH ================= -->
-
-  <section class="research" id="research">
-
-    <div class="section-title">
-
-      <span>RESEARCH & INNOVATION</span>
-
-      <h2>Creating Solutions For Tomorrow</h2>
-
-    </div>
-
-    <div class="research-content">
-
-      <p>
-        Our students and researchers work across artificial
-        intelligence, robotics, healthcare, sustainability,
-        advanced engineering and emerging technologies.
-      </p>
-
-      <br>
-
-      <a href="#" class="btn btn-primary">
-        Explore Research
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= NEWS ================= -->
-
-  <section id="news">
-
-    <div class="section-title">
-
-      <span>WHAT'S HAPPENING</span>
-
-      <h2>Latest News & Events</h2>
-
-    </div>
-
-
-    <div class="news-grid">
-
-      <div class="news-card">
-
-        <img
-          src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80"
-          alt="Campus Event"
+        <a
+            href="mailto:your-email@example.com"
+            class="primary-button"
         >
-
-        <div class="news-content">
-
-          <small>EVENT</small>
-
-          <h3>Innovation & Technology Summit</h3>
-
-          <p>
-            Students showcase innovative projects and
-            emerging technology solutions.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="news-card">
-
-        <img
-          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80"
-          alt="Students"
-        >
-
-        <div class="news-content">
-
-          <small>STUDENT LIFE</small>
-
-          <h3>Student Innovation Challenge</h3>
-
-          <p>
-            Students collaborate to develop solutions
-            for real-world challenges.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="news-card">
-
-        <img
-          src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80"
-          alt="Research Lab"
-        >
-
-        <div class="news-content">
-
-          <small>RESEARCH</small>
-
-          <h3>New Research Initiatives</h3>
-
-          <p>
-            New opportunities for students to work
-            with research teams.
-          </p>
-
-        </div>
-
-      </div>
+            Start a Conversation →
+        </a>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- ================= CTA ================= -->
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
-  <section class="cta" id="apply">
+<footer>
 
-    <h2>Ready to Start Your Journey?</h2>
+    <div class="footer-inner">
 
-    <p>
-      Explore programs and take the next step toward your future.
-    </p>
-
-    <a href="#" class="btn">
-      Apply for Admission
-    </a>
-
-  </section>
+        <div>
+            © 2026 Maniraj Srikoti
+        </div>
 
 
-  <!-- ================= FOOTER ================= -->
+        <div class="socials">
 
-  <footer id="contact">
+            <a href="#">
+                GitHub
+            </a>
 
-    <div class="footer-grid">
+            <a href="#">
+                LinkedIn
+            </a>
 
-      <div>
+            <a href="#">
+                Instagram
+            </a>
 
-        <h3>SR University</h3>
-
-        <p>
-          A future-focused university committed to
-          innovation, research and transformative education.
-        </p>
-
-      </div>
-
-
-      <div>
-
-        <h3>Quick Links</h3>
-
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#programs">Programs</a>
-        <a href="#research">Research</a>
-
-      </div>
-
-
-      <div>
-
-        <h3>Resources</h3>
-
-        <a href="#">Admissions</a>
-        <a href="#">Placements</a>
-        <a href="#">Student Portal</a>
-        <a href="#">Library</a>
-
-      </div>
-
-
-      <div>
-
-        <h3>Contact</h3>
-
-        <p>📍 Warangal, Telangana, India</p>
-        <p>📞 +91 87000 00000</p>
-        <p>✉ info@sruniversity.edu.in</p>
-
-      </div>
+        </div>
 
     </div>
 
+</footer>
 
-    <div class="copyright">
 
-      © 2026 SR University. All Rights Reserved.
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
-    </div>
+<script>
 
-  </footer>
+    /* Reveal sections while scrolling */
 
+    const elements =
+        document.querySelectorAll(
+            ".project, .skill, .timeline-item, .about-card"
+        );
+
+    const observer =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    elements.forEach(element => {
+
+        element.style.opacity = "0";
+
+        element.style.transform =
+            "translateY(30px)";
+
+        element.style.transition =
+            "opacity 0.7s ease, transform 0.7s ease";
+
+        observer.observe(element);
+
+    });
+
+
+    /* Mouse movement effect */
+
+    document.addEventListener(
+        "mousemove",
+        (event) => {
+
+            const orb =
+                document.querySelector(".orb");
+
+            if (!orb) return;
+
+            const x =
+                (event.clientX / window.innerWidth - 0.5)
+                * 20;
+
+            const y =
+                (event.clientY / window.innerHeight - 0.5)
+                * 20;
+
+            orb.style.transform =
+                `translate(${x}px, ${y}px)`;
+
+        }
+    );
+
+</script>
 
 </body>
 </html>
