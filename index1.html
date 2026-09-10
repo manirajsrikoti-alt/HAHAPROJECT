@@ -1,131 +1,1032 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Nova Pro — a scroll-driven product film rendered on HTML Canvas from 300 sequential frames.">
-    <meta name="theme-color" content="#000000">
-    <title>Nova Pro — Scroll Experience</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+  <title>SR University</title>
 
-    <!--
-      Preload the first frame so the very first canvas paint is instant.
-      fetchpriority="high" tells the browser to prioritize this request.
-      The remaining 299 frames are preloaded by FramePreloader in script.js.
-    -->
-    <link rel="preload" as="image" href="frames/ezgif-frame-001.jpg" fetchpriority="high">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #222;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+
+    .top-bar {
+      background: #071b45;
+      color: white;
+      padding: 8px 6%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .navbar {
+      height: 78px;
+      padding: 0 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-box {
+      width: 52px;
+      height: 52px;
+      background: #f5b400;
+      color: #071b45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 22px;
+      border-radius: 8px;
+    }
+
+    .logo-text h2 {
+      color: #071b45;
+      font-size: 23px;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      color: #666;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #e6a900;
+    }
+
+    .apply-btn {
+      background: #f5b400;
+      color: #071b45 !important;
+      padding: 11px 20px;
+      border-radius: 5px;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 600px;
+      background:
+        linear-gradient(
+          rgba(4, 20, 55, 0.78),
+          rgba(4, 20, 55, 0.78)
+        ),
+        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=80");
+
+      background-size: cover;
+      background-position: center;
+
+      display: flex;
+      align-items: center;
+      padding: 80px 8%;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 750px;
+    }
+
+    .hero-content span {
+      color: #f5b400;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.1;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      font-size: 19px;
+      max-width: 650px;
+      color: #eee;
+    }
+
+    .hero-buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 14px 27px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #f5b400;
+      color: #071b45;
+    }
+
+    .btn-outline {
+      border: 2px solid white;
+      color: white;
+    }
+
+    /* ================= STATS ================= */
+
+    .stats {
+      background: #071b45;
+      color: white;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 35px 8%;
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: #f5b400;
+      font-size: 35px;
+    }
+
+    .stat p {
+      font-size: 14px;
+    }
+
+    /* ================= GENERAL ================= */
+
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title span {
+      color: #d99f00;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      color: #071b45;
+      margin-top: 8px;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 15px 15px 0 #f5b400;
+    }
+
+    .about-content h2 {
+      color: #071b45;
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    /* ================= PROGRAMS ================= */
+
+    .programs {
+      background: #f6f8fc;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .program-card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      border-top: 5px solid #f5b400;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .program-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .program-card h3 {
+      color: #071b45;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .program-card p {
+      color: #666;
+    }
+
+    .program-card a {
+      display: inline-block;
+      margin-top: 18px;
+      color: #c38b00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* ================= WHY US ================= */
+
+    .why-us {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .feature {
+      padding: 25px;
+      background: #f7f8fa;
+      border-radius: 8px;
+    }
+
+    .feature h3 {
+      color: #071b45;
+      margin-bottom: 8px;
+    }
+
+    /* ================= RESEARCH ================= */
+
+    .research {
+      background: #071b45;
+      color: white;
+      text-align: center;
+    }
+
+    .research .section-title h2 {
+      color: white;
+    }
+
+    .research .section-title span {
+      color: #f5b400;
+    }
+
+    .research-content {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .research-content p {
+      color: #ddd;
+      font-size: 18px;
+    }
+
+    /* ================= NEWS ================= */
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .news-card {
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+    }
+
+    .news-content {
+      padding: 22px;
+    }
+
+    .news-content small {
+      color: #c38b00;
+      font-weight: bold;
+    }
+
+    .news-content h3 {
+      color: #071b45;
+      margin: 8px 0;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta {
+      background: #f5b400;
+      text-align: center;
+      padding: 70px 8%;
+    }
+
+    .cta h2 {
+      color: #071b45;
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      margin-bottom: 25px;
+    }
+
+    .cta .btn {
+      background: #071b45;
+      color: white;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #061735;
+      color: white;
+      padding: 60px 8% 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    footer h3 {
+      color: #f5b400;
+      margin-bottom: 18px;
+    }
+
+    footer p,
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    footer a:hover {
+      color: #f5b400;
+    }
+
+    .copyright {
+      border-top: 1px solid #31405d;
+      padding-top: 20px;
+      text-align: center;
+      color: #aaa;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 900px) {
+
+      nav ul {
+        gap: 12px;
+      }
+
+      .program-grid,
+      .news-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about,
+      .why-us {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .top-bar {
+        display: none;
+      }
+
+      .navbar {
+        height: auto;
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        min-height: 520px;
+        padding: 60px 6%;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+
+      section {
+        padding: 60px 6%;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .program-grid,
+      .news-grid,
+      .features,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- ============================================================
-         Loading overlay
-         Covers the page while all 300 frames are being preloaded.
-         Fades out with an Apple-style ease once the sequence is ready.
-         role="status" + aria-live so screen readers announce progress.
-         ============================================================ -->
-    <div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite" aria-label="Loading experience">
-        <div class="loading-content">
-            <div class="loading-logo" aria-hidden="true">
-                <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="28" cy="28" r="24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" class="ring" />
-                </svg>
-            </div>
-            <div class="loading-bar" aria-hidden="true">
-                <div class="loading-bar-fill" id="loadingBar"></div>
-            </div>
-            <p class="loading-text">Loading experience
-                <span class="loading-percent" id="loadingPercent">0%</span>
-            </p>
-        </div>
+  <!-- ================= HEADER ================= -->
+
+  <header>
+
+    <div class="top-bar">
+      <span>📞 +91 87000 00000</span>
+      <span>✉ admissions@sruniversity.edu.in</span>
     </div>
 
-    <!-- ============================================================
-         Main content
-         ============================================================ -->
-    <main id="main">
+    <div class="navbar">
 
-        <!-- ========================================================
-             Scroll stage
-             JS sizes this element (viewport-height x multiplier) so
-             the sticky hero stays pinned while you scrub the film.
-             ======================================================== -->
-        <div class="scroll-stage" id="scrollStage">
+      <div class="logo">
+        <div class="logo-box">SR</div>
 
-            <!-- Sticky hero: canvas film plays as you scroll -->
-            <section class="hero" id="hero" aria-label="Animated product film — scroll to play">
-                <canvas id="animationCanvas" aria-hidden="true"></canvas>
+        <div class="logo-text">
+          <h2>SR University</h2>
+          <span>Learn • Innovate • Transform</span>
+        </div>
+      </div>
 
-                <!-- Caption revealed mid-sequence by scroll progress -->
-                <div class="hero-caption" id="heroCaption">
-                    <p class="caption-kicker">Nova Pro</p>
-                    <h2 class="caption-title">Immersive sound.<br>In motion.</h2>
-                </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="#apply" class="apply-btn">Apply Now</a>
+          </li>
+        </ul>
+      </nav>
 
-                <!-- Scroll hint fades out as soon as the user scrolls -->
-                <p class="scroll-hint" id="scrollHint" aria-hidden="true">Scroll to explore</p>
-            </section>
+    </div>
+
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <span>WELCOME TO SR UNIVERSITY</span>
+
+      <h1>
+        Shape Your Future
+        With Innovation
+      </h1>
+
+      <p>
+        Discover a future-focused education where technology,
+        research, entrepreneurship and innovation come together.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#programs" class="btn btn-primary">
+          Explore Programs
+        </a>
+
+        <a href="#about" class="btn btn-outline">
+          Discover SR University
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= STATS ================= -->
+
+  <div class="stats">
+
+    <div class="stat">
+      <h2>50+</h2>
+      <p>Academic Programs</p>
+    </div>
+
+    <div class="stat">
+      <h2>5000+</h2>
+      <p>Students</p>
+    </div>
+
+    <div class="stat">
+      <h2>100+</h2>
+      <p>Faculty Members</p>
+    </div>
+
+    <div class="stat">
+      <h2>25+</h2>
+      <p>Research Labs</p>
+    </div>
+
+  </div>
+
+
+  <!-- ================= ABOUT ================= -->
+
+  <section id="about">
+
+    <div class="about">
+
+      <div class="about-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=1000&q=80"
+          alt="University Campus"
+        >
+
+      </div>
+
+      <div class="about-content">
+
+        <span>ABOUT US</span>
+
+        <h2>Building Tomorrow's Leaders</h2>
+
+        <p>
+          SR University is committed to creating an environment
+          where students can learn, experiment and transform
+          ideas into real-world solutions.
+        </p>
+
+        <p>
+          Our education model combines strong academic foundations
+          with innovation, research, entrepreneurship and industry
+          collaboration.
+        </p>
+
+        <a href="#" class="btn btn-primary">
+          Learn More
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PROGRAMS ================= -->
+
+  <section class="programs" id="programs">
+
+    <div class="section-title">
+
+      <span>ACADEMICS</span>
+
+      <h2>Explore Our Programs</h2>
+
+    </div>
+
+
+    <div class="program-grid">
+
+      <div class="program-card">
+
+        <div class="program-icon">💻</div>
+
+        <h3>Computer Science</h3>
+
+        <p>
+          Learn artificial intelligence, data science,
+          software engineering and modern computing.
+        </p>
+
+        <a href="#">Explore →</a>
+
+      </div>
+
+
+      <div class="program-card">
+
+        <div class="program-icon">🤖</div>
+
+        <h3>Artificial Intelligence</h3>
+
+        <p>
+          Build intelligent systems using machine learning,
+          deep learning and generative AI.
+        </p>
+
+        <a href="#">Explore →</a>
+
+      </div>
+
+
+      <div class="program-card">
+
+        <div class="program-icon">⚙️</div>
+
+        <h3>Engineering</h3>
+
+        <p>
+          Develop engineering skills through practical
+          projects, laboratories and industry exposure.
+        </p>
+
+        <a href="#">Explore →</a>
+
+      </div>
+
+
+      <div class="program-card">
+
+        <div class="program-icon">📊</div>
+
+        <h3>Management</h3>
+
+        <p>
+          Develop leadership, business strategy and
+          entrepreneurship skills.
+        </p>
+
+        <a href="#">Explore →</a>
+
+      </div>
+
+
+      <div class="program-card">
+
+        <div class="program-icon">🔬</div>
+
+        <h3>Research</h3>
+
+        <p>
+          Work with faculty and research teams to solve
+          challenging real-world problems.
+        </p>
+
+        <a href="#">Explore →</a>
+
+      </div>
+
+
+      <div class="program-card">
+
+        <div class="program-icon">🚀</div>
+
+        <h3>Entrepreneurship</h3>
+
+        <p>
+          Turn innovative ideas into startups through
+          mentoring and incubation.
+        </p>
+
+        <a href="#">Explore →</a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= WHY SR ================= -->
+
+  <section>
+
+    <div class="section-title">
+
+      <span>WHY SR UNIVERSITY</span>
+
+      <h2>Education Beyond Classrooms</h2>
+
+    </div>
+
+
+    <div class="why-us">
+
+      <div>
+
+        <h2 style="color:#071b45; margin-bottom:20px;">
+          Learn. Build. Innovate.
+        </h2>
+
+        <p>
+          Students are encouraged to solve real-world problems
+          through hands-on projects, research and collaboration.
+        </p>
+
+      </div>
+
+
+      <div class="features">
+
+        <div class="feature">
+          <h3>🎯 Industry Focus</h3>
+          <p>Connect classroom learning with industry needs.</p>
         </div>
 
-        <!-- ========================================================
-             Content sections — normal document flow after the film
-             ======================================================== -->
-        <section class="section section-intro" aria-labelledby="introTitle">
-            <h1 class="display" id="introTitle" data-reveal>Meet Nova Pro.</h1>
-            <p class="lead" data-reveal>
-                Adaptive audio that surrounds you. Crafted from aerospace-grade
-                aluminum and intuition — then set in motion, frame by frame.
-            </p>
-        </section>
-
-        <section class="section section-specs" aria-labelledby="specsTitle">
-            <h2 class="section-title" id="specsTitle" data-reveal>Engineered to disappear.</h2>
-            <div class="spec-grid">
-                <article class="spec-card" data-reveal>
-                    <h3 class="spec-name">Adaptive ANC</h3>
-                    <p class="spec-desc">Up to 4x more noise cancelled in real time, tuned 200 times per second.</p>
-                </article>
-                <article class="spec-card" data-reveal>
-                    <h3 class="spec-name">40-hour battery</h3>
-                    <p class="spec-desc">All-day listening. A 5-minute charge buys 4 more hours.</p>
-                </article>
-                <article class="spec-card" data-reveal>
-                    <h3 class="spec-name">Spatial Audio</h3>
-                    <p class="spec-desc">Head-tracked 360-degree sound with dynamic EQ and room-sensing.</p>
-                </article>
-                <article class="spec-card" data-reveal>
-                    <h3 class="spec-name">Ultra-low latency</h3>
-                    <p class="spec-desc">Under 40 milliseconds — imperceptible for gaming and live monitoring.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="section section-cta" aria-labelledby="ctaTitle">
-            <h2 class="display" id="ctaTitle" data-reveal>Sound, finally<br>in motion.</h2>
-            <p class="cta-sub" data-reveal>Available in Midnight, Starlight and Space Grey.</p>
-            <div class="cta-row" data-reveal>
-                <a class="btn btn-primary" href="#main">Pre-order now</a>
-                <a class="btn btn-link" href="#hero" id="replayLink">Watch the film again</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer" aria-label="Footer">
-        <div class="footer-inner">
-            <p>&copy; 2026 Nova Audio. Designed in Cupertino.</p>
-            <nav aria-label="Legal">
-                <a href="#main">Privacy</a>
-                <a href="#main">Terms</a>
-                <a href="#main">Legal</a>
-            </nav>
+        <div class="feature">
+          <h3>🔬 Research</h3>
+          <p>Explore emerging technologies through research.</p>
         </div>
-    </footer>
 
-    <!-- Debug frame counter. Visible on hover over the film, or
-         permanently with the URL fragment #debug. -->
-    <div class="frame-debug" id="frameDebug" hidden>Frame: 0 / 299</div>
+        <div class="feature">
+          <h3>🚀 Innovation</h3>
+          <p>Build projects and transform ideas into products.</p>
+        </div>
 
-    <script src="script.js"></script>
+        <div class="feature">
+          <h3>🌎 Global Exposure</h3>
+          <p>Develop skills for opportunities around the world.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= RESEARCH ================= -->
+
+  <section class="research" id="research">
+
+    <div class="section-title">
+
+      <span>RESEARCH & INNOVATION</span>
+
+      <h2>Creating Solutions For Tomorrow</h2>
+
+    </div>
+
+    <div class="research-content">
+
+      <p>
+        Our students and researchers work across artificial
+        intelligence, robotics, healthcare, sustainability,
+        advanced engineering and emerging technologies.
+      </p>
+
+      <br>
+
+      <a href="#" class="btn btn-primary">
+        Explore Research
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= NEWS ================= -->
+
+  <section id="news">
+
+    <div class="section-title">
+
+      <span>WHAT'S HAPPENING</span>
+
+      <h2>Latest News & Events</h2>
+
+    </div>
+
+
+    <div class="news-grid">
+
+      <div class="news-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80"
+          alt="Campus Event"
+        >
+
+        <div class="news-content">
+
+          <small>EVENT</small>
+
+          <h3>Innovation & Technology Summit</h3>
+
+          <p>
+            Students showcase innovative projects and
+            emerging technology solutions.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="news-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80"
+          alt="Students"
+        >
+
+        <div class="news-content">
+
+          <small>STUDENT LIFE</small>
+
+          <h3>Student Innovation Challenge</h3>
+
+          <p>
+            Students collaborate to develop solutions
+            for real-world challenges.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="news-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80"
+          alt="Research Lab"
+        >
+
+        <div class="news-content">
+
+          <small>RESEARCH</small>
+
+          <h3>New Research Initiatives</h3>
+
+          <p>
+            New opportunities for students to work
+            with research teams.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CTA ================= -->
+
+  <section class="cta" id="apply">
+
+    <h2>Ready to Start Your Journey?</h2>
+
+    <p>
+      Explore programs and take the next step toward your future.
+    </p>
+
+    <a href="#" class="btn">
+      Apply for Admission
+    </a>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer id="contact">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <h3>SR University</h3>
+
+        <p>
+          A future-focused university committed to
+          innovation, research and transformative education.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>Quick Links</h3>
+
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#research">Research</a>
+
+      </div>
+
+
+      <div>
+
+        <h3>Resources</h3>
+
+        <a href="#">Admissions</a>
+        <a href="#">Placements</a>
+        <a href="#">Student Portal</a>
+        <a href="#">Library</a>
+
+      </div>
+
+
+      <div>
+
+        <h3>Contact</h3>
+
+        <p>📍 Warangal, Telangana, India</p>
+        <p>📞 +91 87000 00000</p>
+        <p>✉ info@sruniversity.edu.in</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 SR University. All Rights Reserved.
+
+    </div>
+
+  </footer>
+
+
 </body>
 </html>
